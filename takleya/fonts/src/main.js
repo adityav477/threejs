@@ -36,7 +36,7 @@ let textW;
 let textH;
 fontLoader.load('/fonts/helvetiker_regular.typeface.json',
   (font) => {
-    const textGeometry = new TextGeometry("Hello Threejs", {
+    const textGeometry = new TextGeometry("Habibi", {
       font: font,
       size: 2,
       depth: 1,

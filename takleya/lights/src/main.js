@@ -53,12 +53,16 @@ const rectareaLight = new Three.RectAreaLight("white", 1, 10, 10);
 // scene.add(rectareaLight);
 
 //for spotlight we cannot use rotation to orient it we need to use target see documentation 
-const spotLight = new Three.SpotLight("white", 50, 100, 0, 0.5);
-spotLight.position.set(0, 5, 7);
+const spotLight = new Three.SpotLight("pink", 50, 20, 0, 0.5);
+spotLight.position.set(0, 5, 5,);
+
 gui.add(spotLight, 'intensity').min(0).max(100);
 gui.add(spotLight.position, 'x').min(-100).max(100).name("x");
 gui.add(spotLight.position, 'y').min(-100).max(100).name("y");
 gui.add(spotLight.position, 'z').min(-100).max(100).name("z");
+
+const spotLightHelper = new Three.SpotLightHelper(spotLight, "white");
+// scene.add(spotLightHelper);
 
 gui.add(spotLight, 'angle').min(0).max(Math.PI).name("angle");
 scene.add(spotLight);
@@ -101,9 +105,10 @@ const controls = new OrbitControls(camera, renderer.domElement);
 /* animate */
 const animateSpotLight = () => {
   const interval = setInterval(() => {
-    console.log("before", spotLight.angle);
+    // console.log("before", spotLight.angle);
     spotLight.angle += 0.005;
-    console.log("after", spotLight.angle);
+    spotLightHelper.update();
+    // console.log("after", spotLight.angle);
 
     if (spotLight.angle >= Math.PI / 2) {
       clearInterval(interval);
